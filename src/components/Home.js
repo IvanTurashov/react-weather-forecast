@@ -2,16 +2,18 @@
  * Created by ivan on 23.06.18.
  */
 
-import React from 'react';
-import Map from '../components/Map';
-import { WeatherService } from '../services/WeatherService';
+import React, { Component } from 'react';
 import axios from 'axios';
+import { WeatherService } from '../services/WeatherService';
 
-class Home extends React.Component {
+import Map from '../components/Map';
+import { Days } from './Days';
+
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            latlng: {}
+            days: []
         }
     }
 
@@ -30,17 +32,18 @@ class Home extends React.Component {
 
         WeatherService.getWeatherByPosition(latlng, this.source.token)
             .then(data => {
-                console.log(data);
+                this.setState({days: data});
             }, console.error);
     }
 
     render() {
         return (
-            <div>
-                <Map onClick={(latlng) => this.getWeather(latlng)}/>
+            <div className="home">
+                <Map onClick={(latlng) => this.getWeather(latlng)} />
+                <Days days={this.state.days} />
             </div>
         );
-    };
+    }
 }
 
 export default Home;

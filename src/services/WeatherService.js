@@ -21,12 +21,17 @@ const getDataByLatLng = ({lat, lng}, cancelToken) => {
             .then(response => {
                 const list = response.data.list.map(day => {
                     return {
-                        date: new Date(day.dt * 1000),
+                        date: day.dt,
+                        humidity: day.humidity,
+                        speed: day.speed,
                         temp: {
-                            day: day.temp.day,
-                            night: day.temp.night
+                            max: day.temp.max,
+                            min: day.temp.min
                         },
-                        icon: day.weather[0].icon
+                        main: {
+                            icon: day.weather[0].icon,
+                            description: day.weather[0].description
+                        }
                     };
                 });
 

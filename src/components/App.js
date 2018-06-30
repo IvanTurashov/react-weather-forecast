@@ -12,8 +12,8 @@ const App = () => {
         <Router>
             <div>
                 <Switch>
-                    <Route exact path="/" component={Home}/>
-                    <Redirect from='*' to='/'/>
+                    <Route exact path="/" component={Home} />
+                    <Redirect from='*' to='/' />
                 </Switch>
             </div>
         </Router>

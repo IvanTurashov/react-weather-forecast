@@ -1,8 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200');
+
+html, body {
+
+}
+
+html {
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #151515;
+}
+
 body {
     margin: 0;
-    font-size: 16px;
+    background-color: #dbebf1;
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 .map {
-    height: 400px;
+    flex: 1;
+}
+
+.list-days {
+    display: flex;
+    align-items: center;
+    flex-grow: 0;
+    flex-basis: 200px;
+
+    overflow-x: auto;
+}
+
+.day {
+    flex: 0 0 240px;
+    padding: 15px;
+}
+
+.day .header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.day .header img {
+    margin-right: 20px;
+}
+
+.day .header .title,
+.day .header .sub-title {
+    margin: 0;
+}
+
+.day .temp {
+    font-size: 16px;
 }

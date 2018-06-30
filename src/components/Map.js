@@ -2,11 +2,10 @@
  * Created by ivan on 23.06.18.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import L from 'leaflet';
-import { map } from '../styles/styles.css'
 
-class Map extends React.Component {
+class Map extends Component {
     constructor(props) {
         super(props);
     }
@@ -24,8 +23,8 @@ class Map extends React.Component {
         map.setView([59.934, 30.335], zoom);
         tileLayer.addTo(map);
 
-        map.on('click', ({ latlng }) => {
-            const { lat, lng } = latlng;
+        map.on('click', ({latlng}) => {
+            const {lat, lng} = latlng;
 
             if (marker !== undefined) map.removeLayer(marker);
 
@@ -46,7 +45,7 @@ class Map extends React.Component {
 
     render() {
         return (
-            <div id="map" className="{ map }"></div>
+            <div id="map" className="map"></div>
         );
     }
 }
