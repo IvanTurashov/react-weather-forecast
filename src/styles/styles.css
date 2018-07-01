@@ -28,8 +28,7 @@ body {
 .list-days {
     display: flex;
     align-items: center;
-    flex-grow: 0;
-    flex-basis: 200px;
+    flex: 0 1 200px;
 
     overflow-x: auto;
 }
@@ -48,6 +47,8 @@ body {
 
 .day .header img {
     margin-right: 20px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
 }
 
 .day .header .title,

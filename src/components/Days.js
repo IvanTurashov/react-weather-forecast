@@ -24,7 +24,8 @@ const Day = props => {
     return (
         <div className="day">
             <div className="header">
-                <img width="50" height="50" src="../public/favicon-40.png" alt={day.main.icon} />
+                <img width="50" height="50" src={`http://openweathermap.org/img/w/${day.main.icon}.png`}
+                     alt={day.main.icon} />
 
                 <div>
                     <h3 className="title">{moment.unix(day.date).format('ddd, MMM Do')}</h3>
@@ -33,7 +34,7 @@ const Day = props => {
             </div>
 
             <div className="body">
-                <div className="temp"><strong>{toCelsius(day.temp.max)}</strong>  |  {toCelsius(day.temp.min)}</div>
+                <div className="temp"><strong>{toCelsius(day.temp.max)}</strong> | {toCelsius(day.temp.min)}</div>
 
                 <div>humidity: {day.humidity} %</div>
                 <div>speed: {day.speed} mps</div>
