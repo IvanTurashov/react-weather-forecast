@@ -12,7 +12,7 @@ class Carousel extends Component {
         this.state = {
             position: 0,
             direction: 'next',
-            sliding: false,
+            sliding: false
         };
     }
 
@@ -21,9 +21,9 @@ class Carousel extends Component {
 
         if (cw <= 599) return 80;
         if (cw <= 959) return 40;
-        if (cw <= 1249) return 20;
+        if (cw <= 1249) return 30;
 
-        return 15;
+        return 20;
     }
 
     getOrder(itemIndex) {
@@ -96,7 +96,8 @@ class Carousel extends Component {
                     </div>
                 </Swipeable>
 
-                {isDesktop ? <div className="buttons">
+                {isDesktop ?
+                    <div className="buttons">
                         <button onClick={() => this.prevSlide()}>&#8592;</button>
                         <button onClick={() => this.nextSlide()}>&#8594;</button>
                     </div> : null}
