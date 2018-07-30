@@ -59,13 +59,32 @@ body {
 
 .carousel-container {
     display: flex;
-    /*margin: 0 0 20px 20px;*/
+    margin: 20px 0;
 }
 
 .carousel-slot {
-    flex: 1 0 20%;
-    min-width: 240px;
+    flex: 1 0 100%;
+    flex-basis: 15%;
+    min-width: 200px;
     margin-right: 20px;
+}
+
+@media (max-width: 1279px) {
+    .carousel-slot {
+        flex-basis: 20%;
+    }
+}
+
+@media (max-width: 959px) {
+    .carousel-slot {
+        flex-basis: 40%;
+    }
+}
+
+@media (max-width: 599px) {
+    .carousel-slot {
+        flex-basis: 80%;
+    }
 }
 
 .list-days {
@@ -78,7 +97,6 @@ body {
 .day {
     flex: 0 0 240px;
     padding: 15px;
-
     border: 1px solid var(--border-color);
     border-radius: 12px;
     background-color: var(--card-color);
@@ -111,7 +129,7 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 24px;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
 .buttons > button {

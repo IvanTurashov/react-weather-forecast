@@ -12,8 +12,18 @@ class Carousel extends Component {
         this.state = {
             position: 0,
             direction: 'next',
-            sliding: false
+            sliding: false,
         };
+    }
+
+    static getSlotWidth() {
+        const cw = document.body.clientWidth;
+
+        if (cw <= 599) return 80;
+        if (cw <= 959) return 40;
+        if (cw <= 1249) return 20;
+
+        return 15;
     }
 
     getOrder(itemIndex) {
@@ -60,7 +70,9 @@ class Carousel extends Component {
 
     render() {
         const {children} = this.props;
+
         const isDesktop = !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        const slotWidth = Carousel.getSlotWidth();
 
         return (
             <div>
@@ -68,29 +80,26 @@ class Carousel extends Component {
                     onSwipedLeft={() => this.handleSwipe(true)}
                     onSwipedRight={() => this.handleSwipe()}
                 >
-                    <div className="list-days">
-                        <div className="wrapper">
-                            <div className="carousel-container"
-                                 style={{
-                                     transition: `${this.state.sliding ? 'none' : 'transform 1s ease'}`,
-                                     transform: `${!this.state.sliding ? 'translateX(calc(-20% - 20px))' : this.state.direction === 'prev' ? 'translateX(calc(2 * (-20% - 20px)))' : 'translateX(0%)'}`
-                                 }}
-                            >
-                                {children.map((child, index) => (
-                                    <div className="carousel-slot" key={index} style={{order: this.getOrder(index)}}>
-                                        {child}
-                                    </div>
-                                ))}
-                            </div>
+                    <div className="wrapper">
+                        <div className="carousel-container"
+                             style={{
+                                 transition: `${this.state.sliding ? 'none' : 'transform .4s ease'}`,
+                                 transform: `${!this.state.sliding ? `translateX(calc(${-slotWidth}% - 20px))` : this.state.direction === 'prev' ? `translateX(calc(2 * (${-slotWidth}% - 20px)))` : 'translateX(0%)'}`
+                             }}
+                        >
+                            {children.map((child, index) => (
+                                <div className="carousel-slot" key={index} style={{order: this.getOrder(index)}}>
+                                    {child}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </Swipeable>
 
-
                 {isDesktop ? <div className="buttons">
-                    <button onClick={() => this.prevSlide()}>←</button>
-                    <button onClick={() => this.nextSlide()}>→</button>
-                </div> : null}
+                        <button onClick={() => this.prevSlide()}>&#8592;</button>
+                        <button onClick={() => this.nextSlide()}>&#8594;</button>
+                    </div> : null}
             </div>
         )
     }
