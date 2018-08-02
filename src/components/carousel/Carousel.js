@@ -78,15 +78,13 @@ class Carousel extends Component {
             <div>
                 <Swipeable
                     onSwipedLeft={() => this.handleSwipe(true)}
-                    onSwipedRight={() => this.handleSwipe()}
-                >
+                    onSwipedRight={() => this.handleSwipe()}>
                     <div className="wrapper">
                         <div className="carousel-container"
                              style={{
                                  transition: `${this.state.sliding ? 'none' : 'transform .4s ease'}`,
                                  transform: `${!this.state.sliding ? `translateX(calc(${-slotWidth}% - 20px))` : this.state.direction === 'prev' ? `translateX(calc(2 * (${-slotWidth}% - 20px)))` : 'translateX(0%)'}`
-                             }}
-                        >
+                             }}>
                             {children.map((child, index) => (
                                 <div className="carousel-slot" key={index} style={{order: this.getOrder(index)}}>
                                     {child}
@@ -96,11 +94,12 @@ class Carousel extends Component {
                     </div>
                 </Swipeable>
 
-                {isDesktop ?
-                    <div className="buttons">
+                {isDesktop
+                    ? <div className="buttons">
                         <button onClick={() => this.prevSlide()}>&#8592;</button>
                         <button onClick={() => this.nextSlide()}>&#8594;</button>
-                    </div> : null}
+                    </div>
+                    : null}
             </div>
         )
     }

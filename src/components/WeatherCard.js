@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 function toCelsius(temp) {
@@ -10,7 +11,7 @@ function toCelsius(temp) {
     return value.toFixed() + '℃';
 }
 
-const Day = props => {
+const WeatherCard = props => {
     const day = props.day;
 
     return (
@@ -35,4 +36,8 @@ const Day = props => {
     )
 };
 
-export default Day;
+WeatherCard.propTypes = {
+    day: PropTypes.object
+};
+
+export default WeatherCard;

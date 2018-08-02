@@ -7,7 +7,7 @@ import axios from 'axios';
 import { WeatherService } from '../services/WeatherService';
 
 import Map from '../components/Map';
-import Day from '../components/Day';
+import WeatherCard from './WeatherCard';
 import Carousel from './carousel/Carousel';
 
 class Home extends Component {
@@ -42,7 +42,7 @@ class Home extends Component {
             <div className="home">
                 <Map onClick={(latlng) => this.getWeather(latlng)} />
                 <Carousel>
-                    {this.state.days.map((day, idx) => <Day day={day} key={idx}/>)}
+                    {this.state.days.map((day, idx) => <WeatherCard day={day} key={idx}/>)}
                 </Carousel>
             </div>
         );
