@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 function toCelsius(temp) {
-    const value = temp - 273;
+    const value = temp - 273.15;
     return value.toFixed() + '℃';
 }
 
