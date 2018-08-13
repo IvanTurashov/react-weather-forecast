@@ -18,7 +18,7 @@ const WeatherCard = props => {
         <div className="day">
             <div className="header">
                 <img width="50" height="50" src={`http://openweathermap.org/img/w/${day.main.icon}.png`}
-                     alt={day.main.icon} />
+                     alt={day.main.icon}/>
 
                 <div>
                     <h3 className="title">{moment.unix(day.date).format('ddd, MMM Do')}</h3>

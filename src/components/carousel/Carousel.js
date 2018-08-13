@@ -27,24 +27,24 @@ class Carousel extends Component {
     }
 
     getOrder(itemIndex) {
-        const {position} = this.state;
-        const {children} = this.props;
+        const { position } = this.state;
+        const { children } = this.props;
         const numItems = children.length || 1;
 
         return ((numItems + 1) - position + itemIndex) % numItems;
     }
 
     nextSlide() {
-        const {position} = this.state;
-        const {children} = this.props;
+        const { position } = this.state;
+        const { children } = this.props;
         const numItems = children.length || 1;
 
         this.doSliding('next', position === numItems - 1 ? 0 : position + 1);
     }
 
     prevSlide() {
-        const {position} = this.state;
-        const {children} = this.props;
+        const { position } = this.state;
+        const { children } = this.props;
         const numItems = children.length;
 
         this.doSliding('prev', position === 0 ? numItems - 1 : position - 1);
@@ -69,7 +69,7 @@ class Carousel extends Component {
     }
 
     render() {
-        const {children} = this.props;
+        const { children } = this.props;
 
         const isDesktop = !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
         const slotWidth = Carousel.getSlotWidth();
@@ -86,7 +86,7 @@ class Carousel extends Component {
                                  transform: `${!this.state.sliding ? `translateX(calc(${-slotWidth}% - 20px))` : this.state.direction === 'prev' ? `translateX(calc(2 * (${-slotWidth}% - 20px)))` : 'translateX(0%)'}`
                              }}>
                             {children.map((child, index) => (
-                                <div className="carousel-slot" key={index} style={{order: this.getOrder(index)}}>
+                                <div className="carousel-slot" key={index} style={{ order: this.getOrder(index) }}>
                                     {child}
                                 </div>
                             ))}

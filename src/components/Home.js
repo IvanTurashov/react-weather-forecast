@@ -14,33 +14,35 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            days: []
-        }
+            days: [],
+            city: {}
+        };
     }
 
     componentWillUnmount() {
         if (typeof this.source !== 'undefined') {
-            this.source.cancel('Request canceled')
+            this.source.cancel('Request canceled');
         }
     }
 
     getWeather(latlng) {
         if (typeof this.source !== 'undefined') {
-            this.source.cancel('Request canceled')
+            this.source.cancel('Request canceled');
         }
 
         this.source = axios.CancelToken.source();
 
         WeatherService.getWeatherByPosition(latlng, this.source.token)
-            .then(data => {
-                this.setState({days: data});
+            .then(({list: days, city}) => {
+                this.setState({days, city});
             }, console.error);
     }
 
     render() {
+
         return (
             <div className="home">
-                <Map onClick={(latlng) => this.getWeather(latlng)} />
+                <Map onClick={(latlng) => this.getWeather(latlng)} popupText={this.state.city.name}/>
                 <Carousel>
                     {this.state.days.map((day, idx) => <WeatherCard day={day} key={idx}/>)}
                 </Carousel>
