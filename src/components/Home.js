@@ -32,7 +32,8 @@ class Home extends Component {
 
         this.source = axios.CancelToken.source();
 
-        WeatherService.getWeatherByPosition(latlng, this.source.token)
+        WeatherService
+            .getWeatherByPosition(latlng, this.source.token)
             .then(({list: days, city}) => {
                 this.setState({days, city});
             }, console.error);
