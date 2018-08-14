@@ -49,4 +49,4 @@ class WeatherService {
     }
 }
 
-export { WeatherService };
+export default WeatherService;

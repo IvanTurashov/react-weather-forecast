@@ -17,7 +17,7 @@ const WeatherCard = props => {
     return (
         <div className="day">
             <div className="header">
-                <img width="50" height="50" src={`http://openweathermap.org/img/w/${day.main.icon}.png`}
+                <img width="50" height="50" src={`https://openweathermap.org/img/w/${day.main.icon}.png`}
                      alt={day.main.icon}/>
 
                 <div>
