@@ -27,32 +27,20 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                modules: true,
-                                importLoaders: 1,
-                                camelCase: true,
-                                sourceMap: true
-                            }
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                config: {
-                                    ctx: {
-                                        autoprefixer: {
-                                            browsers: 'last 2 versions'
-                                        }
-                                    }
-                                }
-                            }
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 1,
+                            camelCase: true,
+                            sourceMap: true
                         }
-                    ]
-                })
+                    }
+                ]
             }
         ]
     },
@@ -60,10 +48,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'public/index.html',
             favicon: 'public/favicon-40.png'
-        }),
-        new ExtractTextPlugin({
-            filename: 'styles/styles.[hash].css',
-            allChunks: true
         })
     ]
 };

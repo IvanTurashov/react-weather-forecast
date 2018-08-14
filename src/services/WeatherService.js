@@ -4,8 +4,8 @@
 
 import axios from 'axios';
 
-const APPID = '093c63d1d6dd2f0f77c6f14d91a19042',
-    BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast/daily';
+const APPID = '093c63d1d6dd2f0f77c6f14d91a19042';
+const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast/daily';
 
 const getDataByLatLng = ({ lat, lng }, cancelToken) => {
     const params = {
