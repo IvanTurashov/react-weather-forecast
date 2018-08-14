@@ -101,7 +101,7 @@ class Carousel extends Component {
                     </div>
                     : null}
             </div>
-        )
+        );
     }
 }
 

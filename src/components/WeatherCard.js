@@ -33,7 +33,7 @@ const WeatherCard = props => {
                 <div>speed: {day.speed} mps</div>
             </div>
         </div>
-    )
+    );
 };
 
 WeatherCard.propTypes = {

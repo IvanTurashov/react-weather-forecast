@@ -55,7 +55,7 @@ body {
     flex: 1 0 100%;
     flex-basis: 20%;
     min-width: 240px;
-    margin-right: 20px;
+    margin: 0 10px;
 }
 
 @media (max-width: 1279px) {

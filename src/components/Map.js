@@ -41,7 +41,7 @@ class Map extends Component {
 
             if (marker !== undefined) map.removeLayer(marker);
             setMarker(latlng);
-        })
+        });
     }
 
     whenMarkerSet(latlng) {

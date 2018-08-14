@@ -19,17 +19,18 @@ class Home extends Component {
         };
     }
 
-    componentWillUnmount() {
+    cancelRequest() {
         if (typeof this.source !== 'undefined') {
             this.source.cancel('Request canceled');
         }
     }
 
-    getWeather(latlng) {
-        if (typeof this.source !== 'undefined') {
-            this.source.cancel('Request canceled');
-        }
+    componentWillUnmount() {
+        this.cancelRequest();
+    }
 
+    getWeather(latlng) {
+        this.cancelRequest();
         this.source = axios.CancelToken.source();
 
         WeatherService
@@ -40,7 +41,6 @@ class Home extends Component {
     }
 
     render() {
-
         return (
             <div className="home">
                 <Map onClick={(latlng) => this.getWeather(latlng)} popupText={this.state.city.name}/>
