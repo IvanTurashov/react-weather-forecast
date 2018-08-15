@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import { WeatherService } from '../services/WeatherService';
+import WeatherService  from '../services/WeatherService';
 
 import Map from '../components/Map';
 import WeatherCard from './WeatherCard';
