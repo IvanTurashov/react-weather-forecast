@@ -44,8 +44,8 @@ const getDataByLatLng = ({ lat, lng }, cancelToken) => {
 };
 
 class WeatherService {
-    static getWeatherByPosition(latlng, cancelToken) {
-        return getDataByLatLng(latlng, cancelToken);
+    static getWeatherByPosition(obj, cancelToken) {
+        return getDataByLatLng(obj, cancelToken);
     }
 }
 
