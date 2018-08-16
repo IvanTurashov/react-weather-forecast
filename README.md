@@ -23,7 +23,6 @@ Application will run on `localhost:3000`.
 ### Production
 
 ```
-npm run prebuild // Use if the build is already compiled
 npm run build
 ```
 
