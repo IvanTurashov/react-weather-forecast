@@ -3,21 +3,22 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 function toCelsius(temp) {
-    const value = temp - 273;
+    const value = temp - 273.15;
     return value.toFixed() + '℃';
 }
 
-const Day = props => {
+const WeatherCard = props => {
     const day = props.day;
 
     return (
         <div className="day">
             <div className="header">
-                <img width="50" height="50" src={`http://openweathermap.org/img/w/${day.main.icon}.png`}
-                     alt={day.main.icon} />
+                <img width="50" height="50" src={`https://openweathermap.org/img/w/${day.main.icon}.png`}
+                     alt={day.main.icon}/>
 
                 <div>
                     <h3 className="title">{moment.unix(day.date).format('ddd, MMM Do')}</h3>
@@ -32,7 +33,11 @@ const Day = props => {
                 <div>speed: {day.speed} mps</div>
             </div>
         </div>
-    )
+    );
 };
 
-export default Day;
+WeatherCard.propTypes = {
+    day: PropTypes.object
+};
+
+export default WeatherCard;

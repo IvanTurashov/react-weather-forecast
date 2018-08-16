@@ -4,45 +4,48 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import { WeatherService } from '../services/WeatherService';
+import WeatherService  from '../services/WeatherService';
 
 import Map from '../components/Map';
-import Day from '../components/Day';
+import WeatherCard from './WeatherCard';
 import Carousel from './carousel/Carousel';
 
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            days: []
+            days: [],
+            city: {}
+        };
+    }
+
+    cancelRequest() {
+        if (typeof this.source !== 'undefined') {
+            this.source.cancel('Request canceled');
         }
     }
 
     componentWillUnmount() {
-        if (typeof this.source !== 'undefined') {
-            this.source.cancel('Request canceled')
-        }
+        this.cancelRequest();
     }
 
     getWeather(latlng) {
-        if (typeof this.source !== 'undefined') {
-            this.source.cancel('Request canceled')
-        }
-
+        this.cancelRequest();
         this.source = axios.CancelToken.source();
 
-        WeatherService.getWeatherByPosition(latlng, this.source.token)
-            .then(data => {
-                this.setState({days: data});
+        WeatherService
+            .getWeatherByPosition(latlng, this.source.token)
+            .then(({list: days, city}) => {
+                this.setState({days, city});
             }, console.error);
     }
 
     render() {
         return (
             <div className="home">
-                <Map onClick={(latlng) => this.getWeather(latlng)} />
+                <Map onClick={(latlng) => this.getWeather(latlng)} popupText={this.state.city.name}/>
                 <Carousel>
-                    {this.state.days.map((day, idx) => <Day day={day} key={idx}/>)}
+                    {this.state.days.map((day, idx) => <WeatherCard day={day} key={idx}/>)}
                 </Carousel>
             </div>
         );

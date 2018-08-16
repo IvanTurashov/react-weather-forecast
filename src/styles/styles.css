@@ -46,17 +46,6 @@ body {
     overflow: hidden;
 }
 
-.wrapper::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 100px;
-    background-image: linear-gradient(to right, var(--bg-opacity-0), var(--bg));
-}
-
 .carousel-container {
     display: flex;
     margin: 20px 0;
@@ -66,7 +55,7 @@ body {
     flex: 1 0 100%;
     flex-basis: 20%;
     min-width: 240px;
-    margin-right: 20px;
+    margin: 0 10px;
 }
 
 @media (max-width: 1279px) {
@@ -127,9 +116,14 @@ body {
 .buttons > button {
     margin: 0 10px;
     padding: 2px 38px;
+    font-family: Arial;
     font-size: 30px;
     border: 1px solid var(--border-color);
     border-radius: 20px;
     background-color: var(--card-color);
     cursor: pointer;
+}
+
+.buttons > button::-moz-focus-inner {
+    border: 0;
 }
