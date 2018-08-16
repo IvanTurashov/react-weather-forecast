@@ -11,6 +11,7 @@ You need to install (example of software that I used).
 - node v8.9.4
 - npm v6.1.0
 
+Tested in browsers: Chrome, Mozilla, Chrome Android.
 ### Installing and start
 
 ```
