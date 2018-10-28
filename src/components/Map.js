@@ -9,61 +9,62 @@ import L from 'leaflet';
 class Map extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            marker: undefined
-        }
-    }
 
-    build() {
-        const map = L.map('map');
-        const tileLayer = L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
-            maxZoom: 18
-        }).addTo(map);
-        const zoom = 13;
-        const StPetersburg = { lat: 59.934, lng: 30.335 };
-
-        const setMarker = (latlng) => {
-            const { lat, lng } = latlng;
-
-            map.setView([lat, lng], zoom);
-            this.setState({
-                marker: L.marker([lat, lng]).addTo(map)
-            });
-
-            this.whenMarkerSet(latlng);
-        };
-
-        setMarker(StPetersburg);
-
-        map.on('click', ({ latlng }) => {
-            const marker = this.state.marker;
-
-            if (marker !== undefined) map.removeLayer(marker);
-            setMarker(latlng);
-        });
-    }
-
-    whenMarkerSet(latlng) {
-        this.props.onClick(latlng);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-        if (this.state.marker) {
-            this.state.marker.bindPopup(nextProps.popupText).openPopup();
-            return true;
-        }
-
-        return false;
+        this.map = null;
+        this.marker = null;
+        this.tileLayerUrl = 'https://{s}.tile.osm.org/{z}/{x}/{y}.png';
     }
 
     componentDidMount() {
         this.build();
     }
 
+    componentDidUpdate() {
+        if (this.marker) this.marker.bindPopup(this.props.popupText).openPopup();
+    }
+
+    componentWillUnmount() {
+        this.destroy();
+    }
+
+    build() {
+        const StPetersburg = {
+            lat: 59.94627470693442,
+            lng: 30.37350656613762
+        };
+
+        this.map = L.map('map');
+        const tileLayer = L.tileLayer(this.tileLayerUrl, {
+            attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(this.map);
+
+        this.setMarker(StPetersburg);
+
+        this.map.on('click', ({ latlng }) => {
+            if (typeof this.marker !== 'undefined') this.map.removeLayer(this.marker);
+            this.setMarker(latlng);
+        });
+    }
+
+    setMarker(latlng) {
+        this.map.setView(latlng, 13);
+        this.marker = L.marker(latlng).addTo(this.map);
+
+        this.whenMarkerSet(latlng);
+    }
+
+    whenMarkerSet(latlng) {
+        this.props.onClick(latlng);
+    }
+
+    destroy() {
+        this.map.remove();
+    }
+
     render() {
         return (
-            <div id="map" className="map"></div>
+            <div id="map" className="map" />
         );
     }
 }
