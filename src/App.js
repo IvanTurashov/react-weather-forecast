@@ -2,20 +2,21 @@
  * Created by ivan on 23.06.18.
  */
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import GlobalLoader from './components/GlobalLoader.jsx';
 
-import Home from './Home';
+const Home = lazy(() => import('./components/Home'));
 
 const App = () => {
     return (
         <Router>
-            <div>
+            <Suspense fallback={<GlobalLoader />}>
                 <Switch>
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" render={(props) => <Home {...props} />} />
                     <Redirect from='*' to='/' />
                 </Switch>
-            </div>
+            </Suspense>
         </Router>
     );
 };
