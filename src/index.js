@@ -4,6 +4,14 @@
 
 import React from 'react';
 import ReactDom from 'react-dom';
+import { Provider as ReduxProvider } from 'react-redux';
 import App from './App';
+import createStore from './store/store';
 
-ReactDom.render(<App />, document.getElementById('app'));
+const store = createStore();
+
+ReactDom.render(
+    <ReduxProvider store={store}>
+        <App />
+    </ReduxProvider>,
+    document.getElementById('app'));

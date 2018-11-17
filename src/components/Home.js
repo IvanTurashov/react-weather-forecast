@@ -3,8 +3,8 @@
  */
 
 import React, { Component } from 'react';
-import axios from 'axios';
-import WeatherService  from '../services/WeatherService';
+import { connect } from 'react-redux';
+import { fetch, cancelFetch, clear } from '../store/actions/weatherList';
 
 import Map from '../components/Map';
 import WeatherCard from './WeatherCard';
@@ -13,43 +13,53 @@ import Carousel from './carousel/Carousel';
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            days: [],
-            city: {}
-        };
-    }
 
-    cancelRequest() {
-        if (typeof this.source !== 'undefined') {
-            this.source.cancel('Request canceled');
-        }
+        this.getWeather = this.getWeather.bind(this);
     }
 
     componentWillUnmount() {
-        this.cancelRequest();
+        this.props.cancelFetch();
+        this.props.clear();
+
+        this.getWeather = this.getWeather.bind(this);
     }
 
     getWeather(latlng) {
-        this.cancelRequest();
-        this.source = axios.CancelToken.source();
-
-        WeatherService
-            .getWeatherByPosition(latlng, this.source.token)
-            .then(({list: days, city}) => {
-                this.setState({days, city});
-            }, console.error);
+        this.props.fetch(latlng);
     }
 
     render() {
+        const { list, city, request } = this.props;
+
         return (
             <div className="home">
-                <Map onClick={(latlng) => this.getWeather(latlng)} popupText={this.state.city.name}/>
+                <Map onClick={this.getWeather} popupText={city.name} />
                 <Carousel>
-                    {this.state.days.map((day, idx) => <WeatherCard day={day} key={idx}/>)}
+                    {list.map((day) => <WeatherCard day={day} key={day.date} />)}
                 </Carousel>
             </div>
         );
     }
 }
 
-export default Home;
+function mapStateToProps(state) {
+    const { city, list, request } = state.weatherList;
+
+    return { city, list, request };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetch: latlng => {
+            dispatch(fetch(latlng));
+        },
+        cancelFetch: () => {
+            dispatch(cancelFetch());
+        },
+        clear: () => {
+            dispatch(clear());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
