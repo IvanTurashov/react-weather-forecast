@@ -1,35 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:200');
 
 :root {
-    --bg: rgba(183, 183, 183, 1);
     --bg-opacity-0: rgba(183, 183, 183, 0);
     --border-color: rgba(0, 0, 0, .3);
     --card-color: rgb(245, 245, 245);
-}
-
-* {
-    outline: none;
-}
-
-html, body {
-
-}
-
-html {
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    color: #151515;
-}
-
-body {
-    margin: 0;
-    background-color: var(--bg);
-}
-
-.home {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
 }
 
 .map {
