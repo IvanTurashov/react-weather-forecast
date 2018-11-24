@@ -5,9 +5,9 @@
 import React, { lazy, Suspense } from 'react';
 import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { injectGlobal } from 'emotion';
-import GlobalLoader from './components/GlobalLoader.jsx';
+import { GlobalLoader } from './components/Loaders.jsx';
 
-const Home = lazy(() => import('./components/Home'));
+const Home = lazy(() => import('./components/Home.jsx'));
 
 injectGlobal`
   * {

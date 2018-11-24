@@ -8,9 +8,10 @@ import styled from 'react-emotion';
 import { Transition } from 'react-transition-group';
 import { fetch, cancelFetch, clear } from '../store/actions/weatherList';
 
-import Map from '../components/Map';
-import WeatherCard from './WeatherCard';
-import Carousel from './carousel/Carousel';
+import Map from './Map.jsx';
+import WeatherCard from './WeatherCard.jsx';
+import Carousel from './carousel/Carousel.jsx';
+import { Loader } from './Loaders.jsx';
 
 const HomePage = styled('div')`
     display: flex;

@@ -5,6 +5,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import L from 'leaflet';
+import styled from 'react-emotion';
+
+const MapWrapper = styled('div')`
+  flex: 1;
+`;
 
 class Map extends Component {
     constructor(props) {
@@ -20,7 +25,8 @@ class Map extends Component {
     }
 
     componentDidUpdate() {
-        if (this.marker) this.marker.bindPopup(this.props.popupText).openPopup();
+        const { popupText } = this.props;
+        if (this.marker && popupText) this.marker.bindPopup(popupText).openPopup();
     }
 
     componentWillUnmount() {
@@ -64,7 +70,7 @@ class Map extends Component {
 
     render() {
         return (
-            <div id="map" className="map" />
+            <MapWrapper id="map" />
         );
     }
 }
