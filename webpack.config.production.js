@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js',
+    entry: './src/index.jsx',
     output: {
         filename: 'static/bundle.[hash].js',
         path: path.resolve(__dirname, 'dist'),
