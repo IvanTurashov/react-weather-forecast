@@ -5,9 +5,10 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/index.jsx',
     output: {
         filename: 'static/bundle.[hash].js',
@@ -26,15 +27,6 @@ module.exports = {
                 use: [
                     {
                         loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            camelCase: true,
-                            sourceMap: true
-                        }
                     }
                 ]
             },
@@ -48,6 +40,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'public/index.html',
             favicon: 'public/favicon-40.png'
-        })
+        }),
+        new webpack.ContextReplacementPlugin(
+            /moment[/\\]locale$/,
+            /en/
+        ),
+        new BundleAnalyzerPlugin()
     ]
 };

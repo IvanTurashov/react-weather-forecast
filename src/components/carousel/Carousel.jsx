@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 import Swipeable from 'react-swipeable';
 import PropTypes from 'prop-types';
-import uuidv4 from 'uuid/v4';
 import { Wrapper, Container, Slot, Buttons, Button } from './elements';
 
 class Carousel extends Component {
@@ -88,7 +87,7 @@ class Carousel extends Component {
                     <Wrapper>
                         <Container sliding={sliding} direction={direction} slotWidth={slotWidth}>
                             {children.map((child, index) => (
-                                <Slot key={child.key || uuidv4()} order={this.getOrder(index)}>
+                                <Slot key={child.key} order={this.getOrder(index)}>
                                     {child}
                                 </Slot>
                             ))}

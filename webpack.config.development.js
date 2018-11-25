@@ -2,7 +2,6 @@
  * Created by ivan on 03.06.18.
  */
 
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const port = process.env.PORT || 3000;
@@ -27,14 +26,6 @@ module.exports = {
                 use: [
                     {
                         loader: 'style-loader'
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            camelCase: true,
-                            sourceMap: true
-                        }
                     }
                 ]
             },
