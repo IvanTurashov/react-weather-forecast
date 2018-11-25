@@ -8,12 +8,12 @@ import styled from 'react-emotion';
 import { Transition } from 'react-transition-group';
 import { fetch, cancelFetch, clear } from '../store/actions/weatherList';
 
-import Map from './Map.jsx';
-import WeatherCard from './WeatherCard.jsx';
-import Carousel from './carousel/Carousel.jsx';
-import { Loader } from './Loaders.jsx';
+import Map from '../components/Map.jsx';
+import WeatherCard from '../components/WeatherCard.jsx';
+import Carousel from '../components/carousel/Carousel.jsx';
+import { Loader } from '../components/Loaders.jsx';
 
-const HomePage = styled('div')`
+const Page = styled('div')`
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -22,7 +22,7 @@ const HomePage = styled('div')`
     transition: opacity .8s ease-out;
 `;
 
-class Home extends Component {
+class MapPage extends Component {
     constructor(props) {
         super(props);
 
@@ -57,12 +57,12 @@ class Home extends Component {
                         timeout={0}
                         unmountOnExit>
                 {(state) => (
-                    <HomePage transitionState={state}>
+                    <Page transitionState={state}>
                         <Map onClick={this.getWeather} popupText={city.name} />
                         <Carousel>
                             {list.map((day) => <WeatherCard day={day} key={day.date} />)}
                         </Carousel>
-                    </HomePage>
+                    </Page>
                 )}
             </Transition>
         );
@@ -89,4 +89,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(MapPage);

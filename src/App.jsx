@@ -2,12 +2,13 @@
  * Created by ivan on 23.06.18.
  */
 
-import React, { lazy, Suspense } from 'react';
-import { Switch, BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import React, { Fragment, Suspense } from 'react';
+import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import { injectGlobal } from 'emotion';
-import { GlobalLoader } from './components/Loaders.jsx';
+import routes from './routes';
 
-const Home = lazy(() => import('./components/Home.jsx'));
+import { GlobalLoader } from './components/Loaders.jsx';
+import Menu from './components/Menu.jsx';
 
 injectGlobal`
   * {
@@ -29,12 +30,24 @@ injectGlobal`
 const App = () => {
     return (
         <Router>
-            <Suspense fallback={<GlobalLoader />}>
-                <Switch>
-                    <Route exact path="/" render={(props) => <Home {...props} />} />
-                    <Redirect from='*' to='/' />
-                </Switch>
-            </Suspense>
+            <Fragment>
+                <Menu />
+
+                <Suspense fallback={<GlobalLoader />}>
+                    <Switch>
+                        {routes.map(({ path, component: Component, ...props }) => {
+                            return <Route
+                                key={path}
+                                path={path}
+                                render={props => <Component {...props} />}
+                                {...props}
+                            />
+                        })}
+
+                        <Redirect from='*' to='/' />
+                    </Switch>
+                </Suspense>
+            </Fragment>
         </Router>
     );
 };
