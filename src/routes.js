@@ -1,8 +1,8 @@
 import { lazy } from "react";
 
-const Main = lazy(() => import('./pages/MainPage.jsx'));
-const Map = lazy(() => import('./pages/MapPage.jsx'));
-const City = lazy(() => import('./pages/CityPage.jsx'));
+const Main = lazy(() => import('./pages/main/MainPage.jsx'));
+const Map = lazy(() => import('./pages/map/MapPage.jsx'));
+const City = lazy(() => import('./pages/chart/CityPage.jsx'));
 
 const routes = [
     {
@@ -18,7 +18,7 @@ const routes = [
         toMenu: true,
         component: Map
     }, {
-        path: '/city',
+        path: '/chart',
         title: 'Поиск по городам',
         exact: false,
         toMenu: true,

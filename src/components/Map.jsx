@@ -34,18 +34,17 @@ class Map extends Component {
     }
 
     build() {
-        const StPetersburg = {
-            lat: 59.94627470693442,
-            lng: 30.37350656613762
-        };
-
+        const { coord } = this.props;
         this.map = L.map('map');
-        const tileLayer = L.tileLayer(this.tileLayerUrl, {
+        L.tileLayer(this.tileLayerUrl, {
             attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 18
         }).addTo(this.map);
 
-        this.setMarker(StPetersburg);
+        this.setMarker({
+            lat: coord.lat,
+            lng: coord.lon
+        });
 
         this.map.on('click', ({ latlng }) => {
             if (typeof this.marker !== 'undefined') this.map.removeLayer(this.marker);
@@ -60,8 +59,8 @@ class Map extends Component {
         this.whenMarkerSet(latlng);
     }
 
-    whenMarkerSet(latlng) {
-        this.props.onClick(latlng);
+    whenMarkerSet({ lat, lng: lon }) {
+        this.props.onClick({ lat, lon });
     }
 
     destroy() {

@@ -3,12 +3,13 @@
  */
 
 import React, { Fragment, Suspense } from 'react';
-import { Switch, Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { injectGlobal } from 'emotion';
+import styled from 'react-emotion';
 import routes from './routes';
 
 import { GlobalLoader } from './components/Loaders.jsx';
-import Menu from './components/Menu.jsx';
+import Nav from './components/Nav.jsx';
 
 injectGlobal`
   * {
@@ -27,29 +28,29 @@ injectGlobal`
   }
 `;
 
-const App = () => {
+const App = (props) => {
+    const { pathname } = props.location;
+
     return (
-        <Router>
-            <Fragment>
-                <Menu />
+        <Fragment>
+            {pathname !== '/' && <Nav />}
 
-                <Suspense fallback={<GlobalLoader />}>
-                    <Switch>
-                        {routes.map(({ path, component: Component, ...props }) => {
-                            return <Route
-                                key={path}
-                                path={path}
-                                render={props => <Component {...props} />}
-                                {...props}
-                            />
-                        })}
+            <Suspense fallback={<GlobalLoader />}>
+                <Switch>
+                    {routes.map(({ path, component: Component, ...props }) => {
+                        return <Route
+                            key={path}
+                            path={path}
+                            render={props => <Component {...props} />}
+                            {...props}
+                        />
+                    })}
 
-                        <Redirect from='*' to='/' />
-                    </Switch>
-                </Suspense>
-            </Fragment>
-        </Router>
+                    <Redirect from='*' to='/' />
+                </Switch>
+            </Suspense>
+        </Fragment>
     );
 };
 
-export default App;
+export default withRouter(App);

@@ -1,44 +1,19 @@
-import React from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
-import styled from 'react-emotion';
+import React, { PureComponent } from 'react';
+import { withRouter } from 'react-router-dom';
 import routes from '../routes';
 
-const MenuContainer = styled('nav')`
-  display: flex;
-  border-bottom: 1px solid black;
-`;
+class Menu extends PureComponent {
+    constructor(props) {
+        super(props);
 
-const MenuLink = styled(NavLink)`
-  padding: 0.8rem 1rem;
-  margin: 0.5rem;
-  color: black;
-  
-  &.active {
-    color: brown;
-  }
-  
-  &:hover,
-  &:active {
-    color: aqua;
-  }
-`;
+        this.routes = routes.filter(route => route.toMenu);
+    }
 
-const Menu = () => {
-    return (
-        <MenuContainer>
-            {routes
-                .filter(route => route.toMenu)
-                .map(({ path, title }) => {
-                    return (
-                        <MenuLink
-                            key={path}
-                            to={path}>
-                            {title}
-                        </MenuLink>
-                    )
-                })}
-        </MenuContainer>
-    )
-};
+    render() {
+        const { linkComponent } = this.props;
+
+        return this.routes.map(route => linkComponent(route));
+    }
+}
 
 export default withRouter(Menu);

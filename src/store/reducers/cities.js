@@ -1,11 +1,5 @@
 const initialState = {
     list: [],
-    city: {
-        coord: { lon: 30.2905, lat: 59.9294 },
-        country: 'RU',
-        id: 519690,
-        name: 'Novaya Gollandiya'
-    },
     request: false
 };
 
@@ -13,24 +7,24 @@ export default function (state = initialState, action) {
     const { type, data } = action;
 
     switch (type) {
-        case 'FETCH_WEATHER':
+        case 'FETCH_CITIES':
             return {
                 ...state,
                 request: true
             };
 
-        case 'CANCEL_FETCH_WEATHER':
+        case 'CANCEL_FETCH_CITIES':
             return {
                 ...state,
                 request: false
             };
 
-        case 'FETCH_SUCCESS_WEATHER':
+        case 'FETCH_SUCCESS_CITIES':
             return {
                 ...data,
                 request: false
             };
-        case 'CLEAN_WEATHER':
+        case 'CLEAN_CITIES':
             return initialState;
 
         default:

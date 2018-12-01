@@ -6,12 +6,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'react-emotion';
 import { Transition } from 'react-transition-group';
-import { fetch, cancelFetch, clear } from '../store/actions/weatherList';
+import { fetch, cancelFetch, clear } from '../../store/actions/weatherList';
 
-import Map from '../components/Map.jsx';
-import WeatherCard from '../components/WeatherCard.jsx';
-import Carousel from '../components/carousel/Carousel.jsx';
-import { Loader } from '../components/Loaders.jsx';
+import Map from '../../components/Map.jsx';
+import WeatherCard from '../../components/WeatherCard.jsx';
+import Carousel from '../../components/carousel/Carousel.jsx';
+import { Loader } from '../../components/Loaders.jsx';
 
 const Page = styled('div')`
     display: flex;
@@ -39,7 +39,6 @@ class MapPage extends Component {
 
     componentWillUnmount() {
         this.props.cancelFetch();
-        this.props.clear();
 
         this.getWeather = this.getWeather.bind(this);
     }
@@ -58,7 +57,10 @@ class MapPage extends Component {
                         unmountOnExit>
                 {(state) => (
                     <Page transitionState={state}>
-                        <Map onClick={this.getWeather} popupText={city.name} />
+                        <Map
+                            onClick={this.getWeather}
+                            popupText={city.name}
+                            coord={city.coord} />
                         <Carousel>
                             {list.map((day) => <WeatherCard day={day} key={day.date} />)}
                         </Carousel>
