@@ -11,7 +11,7 @@ const fetchWeatherList = function* (action) {
         const { data } = yield call(WeatherService.getWeatherByPosition, action.data, token);
         yield put(fetchSuccess(data));
     } catch (e) {
-        yield put(fetchFailed());
+        yield put(fetchFailed(e));
     } finally {
         if (yield cancelled()) {
             yield call(cancelSource.cancel);

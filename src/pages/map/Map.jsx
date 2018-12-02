@@ -1,9 +1,4 @@
-/**
- * Created by ivan on 23.06.18.
- */
-
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import L from 'leaflet';
 import styled from 'react-emotion';
 
@@ -11,7 +6,7 @@ const MapWrapper = styled('div')`
   flex: 1;
 `;
 
-class Map extends Component {
+class Map extends PureComponent {
     constructor(props) {
         super(props);
 
@@ -35,6 +30,7 @@ class Map extends Component {
 
     build() {
         const { coord } = this.props;
+
         this.map = L.map('map');
         L.tileLayer(this.tileLayerUrl, {
             attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -48,15 +44,17 @@ class Map extends Component {
 
         this.map.on('click', ({ latlng }) => {
             if (typeof this.marker !== 'undefined') this.map.removeLayer(this.marker);
-            this.setMarker(latlng);
+            this.setMarker(latlng, () => {
+                this.whenMarkerSet(latlng);
+            });
         });
     }
 
-    setMarker(latlng) {
+    setMarker(latlng, callback) {
         this.map.setView(latlng, 13);
         this.marker = L.marker(latlng).addTo(this.map);
 
-        this.whenMarkerSet(latlng);
+        if (typeof callback === 'function') callback();
     }
 
     whenMarkerSet({ lat, lng: lon }) {
@@ -73,9 +71,5 @@ class Map extends Component {
         );
     }
 }
-
-Map.propTypes = {
-    popupText: PropTypes.string
-};
 
 export default Map;

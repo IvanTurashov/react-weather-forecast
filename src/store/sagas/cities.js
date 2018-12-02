@@ -11,8 +11,7 @@ const fetchCities = function* (action) {
         const { data } = yield call(WeatherService.findCities, action.data, token);
         yield put(fetchSuccess(data));
     } catch (e) {
-        console.error(e);
-        yield put(fetchFailed());
+        yield put(fetchFailed(e));
     } finally {
         if (yield cancelled()) {
             yield call(cancelSource.cancel);

@@ -47,9 +47,9 @@ const App = (props) => {
                             <Route
                                 key={path}
                                 path={path}
-                                render={props => (
+                                render={() => (
                                     <Page fullSize={fullSize} center={center} background={background}>
-                                        <Component {...props} />
+                                        <Component />
                                     </Page>
                                 )}
                                 {...rest}

@@ -1,21 +1,10 @@
 import styled from 'react-emotion';
-import StyleConst from './constants';
 
-export const Page = styled('div')`
-`;
-
-export const Row = styled('div')`
+export const List = styled('ul')`
   display: flex;
-`;
-
-export const ListItemTitle = styled('li')`
-  padding: 0 8px 0 calc(30% + 16px);
-  font-size: 16px;
-  font-weight: bold;
-  
-  & + * {
-    margin-top: 8px;
-  }
+  flex-direction: column;
+  margin: 16px 0;
+  padding: 0;
 `;
 
 export const ListItem = styled('li')`
@@ -26,7 +15,7 @@ export const ListItem = styled('li')`
   
   & > *:nth-child(1) {
     text-align: right;
-    color: #666666;
+    color: #666;
   }
   
   & > *:nth-child(2) {
@@ -38,11 +27,4 @@ export const ListItem = styled('li')`
   & + * {
     margin-top: 8px;
   }
-`;
-
-export const List = styled('ul')`
-  display: flex;
-  flex-direction: column;
-  margin: 16px 0;
-  padding: 0;
 `;

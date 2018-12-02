@@ -1,10 +1,12 @@
 import React, { memo } from 'react';
 import styled from 'react-emotion';
 import moment from "moment";
+
+import { ToCelsius } from "../../components/Common.jsx";
 import { List, ListItem } from "../../style/common";
 import StyleConst from '../../style/constants';
 
-const WeatherInfoCard = styled('div')`
+const Card = styled('div')`
   display: flex;
   flex-direction: column;
   margin-top: 14px;
@@ -21,7 +23,7 @@ const Title = styled('div')`
 
 const Subtitle = styled('div')`
   font-size: 18px;
-  color: #666666;
+  color: #666;
   
   @media (max-width: ${StyleConst.nd}) {
     font-size: 16px;
@@ -51,34 +53,37 @@ const Img = styled('img')`
   }
 `;
 
-const Temp = styled('div')`
+const Temperature = styled('div')`
   display: inline-block;
   margin-left: 14px;
 `;
 
-const AdditionalInfo = styled(List)`
+const Additional = styled(List)`
   text-wrap: none;
 `;
 
 const WeatherInfo = memo(({ weather = null, city }) => {
-    /* todo: make city name */
     return (
         weather && (
-            <WeatherInfoCard>
-                <Title>Weather in {`${city.name}, ${city.country || city.sys.country}`}</Title>
+            <Card>
+                <Title>Weather in {`${city.name}, ${city.country}`}</Title>
                 <Subtitle>{moment.unix(weather.date).format('dddd, MMM Do')}</Subtitle>
 
                 <MainInfo>
                     <Img src={`https://openweathermap.org/img/w/${weather.main.icon}.png`}
                          alt={weather.main.icon} />
 
-                    <Temp>
-                        <div>Day: {weather.temp.day} ℃</div>
-                        <div>Night: {weather.temp.night} ℃</div>
-                    </Temp>
+                    <Temperature>
+                        <div>
+                            Day: <ToCelsius temp={weather.temp.day} />
+                        </div>
+                        <div>
+                            Night: <ToCelsius temp={weather.temp.day} />
+                        </div>
+                    </Temperature>
                 </MainInfo>
 
-                <AdditionalInfo>
+                <Additional>
                     <ListItem>
                         <span>Wind</span>
                         <div>{weather.speed} mps</div>
@@ -88,8 +93,8 @@ const WeatherInfo = memo(({ weather = null, city }) => {
                         <span>Humidity</span>
                         <div>{weather.humidity}%</div>
                     </ListItem>
-                </AdditionalInfo>
-            </WeatherInfoCard>
+                </Additional>
+            </Card>
         )
     );
 });

@@ -5,7 +5,7 @@ import ChartIcon from '../assets/chart.png';
 
 const Main = lazy(() => import('./pages/main/MainPage.jsx'));
 const Map = lazy(() => import('./pages/map/MapPage.jsx'));
-const City = lazy(() => import('./pages/chart/CityPage.jsx'));
+const City = lazy(() => import('./pages/chart/ChartPage.jsx'));
 
 const routes = [
     {

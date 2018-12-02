@@ -2,7 +2,6 @@ import React from 'react';
 import styled, { css } from 'react-emotion';
 import GlobalIcon from '../../assets/global-loader.gif';
 import LoaderIcon from '../../assets/loader.gif';
-import ErrorIcon from '../../assets/error.png';
 
 // CSS
 
@@ -64,11 +63,6 @@ export const Loader = styled('div')`
       ${({ showLoader }) => showLoader && css`
           display: block;
           background-image: url(${LoaderIcon});
-      `}
-      
-      ${({ showError }) => showError && css`
-          display: block;
-          background-image: url(${ErrorIcon});
       `}
   }
 `;

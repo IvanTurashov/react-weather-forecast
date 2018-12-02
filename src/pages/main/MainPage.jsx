@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from './Menu.jsx';
+import Menu from './MainMenu.jsx';
 
 const MainPage = () => <Menu />;
 

@@ -7,7 +7,7 @@ const initialState = {
         name: 'Novaya Gollandiya'
     },
     request: false,
-    error: false
+    error: null
 };
 
 export default function (state = initialState, action) {
@@ -38,7 +38,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 request: false,
-                error: true
+                error: action.data
             };
 
         case 'CLEAN_WEATHER':

@@ -3,10 +3,11 @@
  */
 
 import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'react-emotion';
-import StyleConst from '../style/constants';
+
+import { ToCelsius } from "../../components/Common.jsx";
+import StyleConst from '../../style/constants';
 
 const Card = styled('div')`
   flex: 0 0 240px;
@@ -27,14 +28,6 @@ const Header = styled('div')`
   margin-bottom: 10px;
 `;
 
-const Body = styled('div')`
-  @media (max-height: ${StyleConst.xs}) and (orientation: landscape) {
-      & > div:not(:first-child) {
-          display: none;
-      }
-  }
-`;
-
 const WeatherImage = styled('img')`
   width: 50px;
   height: 50px;
@@ -43,21 +36,27 @@ const WeatherImage = styled('img')`
   background-color: #d3d3d3;
 `;
 
-const Title = styled('h3')`
-  margin: 0;
+const Title = styled('div')`
+  font-size: 16px;
+  font-weight: bold;
 `;
 
-const Subtitle = styled('h4')`
-  margin: 0;
+const Subtitle = styled('div')`
+  font-size: 14px;
+  font-weight: bold;
 `;
 
-const Temperature = styled('div')`
+const HideXs = styled('div')`
+  @media (max-height: ${StyleConst.xs}) and (orientation: landscape) {
+    display: none;
+  }
+`;
+
+const Temperature = styled(HideXs)`
   font-size: 16px;
 `;
 
-const ToCelsius = memo(({ temp }) => {
-    return temp.toFixed() + '℃';
-});
+const Additional = styled(HideXs)``;
 
 const WeatherCard = memo(props => {
     const day = props.day;
@@ -74,23 +73,19 @@ const WeatherCard = memo(props => {
                 </div>
             </Header>
 
-            <Body>
-                <Temperature>
-                    <strong>
-                        <ToCelsius temp={day.temp.max} />
-                    </strong>
-                    | <ToCelsius temp={day.temp.min} />
-                </Temperature>
+            <Temperature>
+                <strong>
+                    <ToCelsius temp={day.temp.max} />
+                </strong>
+                | <ToCelsius temp={day.temp.min} />
+            </Temperature>
 
+            <Additional>
                 <div>humidity: {day.humidity} %</div>
                 <div>speed: {day.speed} mps</div>
-            </Body>
+            </Additional>
         </Card>
     );
 });
-
-WeatherCard.propTypes = {
-    day: PropTypes.object
-};
 
 export default WeatherCard;

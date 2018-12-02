@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import Swipeable from 'react-swipeable';
-import PropTypes from 'prop-types';
 import { Wrapper, Container, Slot, Buttons, Button } from './elements';
 
 class Carousel extends Component {
@@ -105,9 +104,5 @@ class Carousel extends Component {
         );
     }
 }
-
-Carousel.propTypes = {
-    children: PropTypes.node
-};
 
 export default Carousel;

@@ -1,7 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import Select from 'react-select';
-import { cancelFetch, clear, fetch } from "../store/actions/cities";
+import styled from 'react-emotion';
+import { cancelFetch, clear, fetch } from "../../store/actions/cities";
+
+const Description = styled('div')`
+  padding-left: 2px;
+  font-size: 12px;
+  color: #666;
+`;
 
 class City extends Component {
     constructor(props) {
@@ -37,16 +44,21 @@ class City extends Component {
         const { cities, request, value, onChange } = this.props;
 
         return (
-            <Select
-                value={value}
-                options={cities}
-                getOptionLabel={city => city.id ? `${city.name}, ${city.country || city.sys.country}` : 'Not selected'}
-                getOptionValue={(option) => (option['id'])}
-                onInputChange={this.searchCity}
-                onChange={onChange}
-                isLoading={request}
-                isClearable={true}
-            />
+            <Fragment>
+                <Select
+                    value={value}
+                    options={cities}
+                    getOptionLabel={city => city.id ? `${city.name}, ${city.country || city.sys.country}` : 'Not selected'}
+                    getOptionValue={(option) => (option['id'])}
+                    onInputChange={this.searchCity}
+                    onChange={onChange}
+                    isLoading={request}
+                />
+
+                <Description>
+                    Input more than 3 letters
+                </Description>
+            </Fragment>
         )
     }
 }

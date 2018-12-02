@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Chart from 'chart.js';
+import Chart from '../../../node_modules/chart.js/src/chart';
 import moment from 'moment';
-import isEqual from 'react-fast-compare';
 
 class ChartWeather extends Component {
     constructor(props) {
@@ -31,22 +30,23 @@ class ChartWeather extends Component {
             data: data,
             options: {
                 animation: {
-                    onComplete: function () {
+                    duration: 0,
+                    onComplete() {
                         const chartInstance = this.chart;
                         const ctx = chartInstance.ctx;
                         ctx.textAlign = 'center';
-                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                        ctx.fillStyle = '#666';
                         ctx.textBaseline = 'bottom';
 
                         this.data.datasets.forEach((dataset, i) => {
                             const meta = chartInstance.controller.getDatasetMeta(i);
                             meta.data.forEach((bar, index) => {
                                 const data = dataset.data[index];
-                                const offset = data > 0 ? 5 : -20;
-                                ctx.fillText(`${data.toFixed()}`, bar._model.x, bar._model.y - offset);
+                                const offset = data > 0 ? 2 : -16;
+                                ctx.fillText(data.toFixed(), bar._model.x, bar._model.y - offset);
                             });
                         });
-                    },
+                    }
                 },
                 legend: {
                     display: true,

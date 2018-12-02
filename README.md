@@ -11,12 +11,12 @@ You need to install (example of software that I used).
 - node v8.9.4
 - npm v6.1.0
 
-Tested in browsers: Chrome, Mozilla, Chrome Android.
+Tested in browsers: Chrome, Mozilla, Edge, Safari.
 ### Installing and start
 
 ```
 npm i
-npm run dev
+npm start
 ```
 
 Application will run on `localhost:3000`.
