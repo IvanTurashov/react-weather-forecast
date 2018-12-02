@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200');
+
+:root {
+    --bg: rgba(183, 183, 183, 1);
+    --bg-opacity-0: rgba(183, 183, 183, 0);
+    --border-color: rgba(0, 0, 0, .3);
+    --card-color: rgb(245, 245, 245);
+}
+
+* {
+    outline: none;
+}
+
+html, body {
+
+}
+
+html {
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    color: #151515;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.map {
+    flex: 1;
+}
+
+.carousel {
+    display: flex;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-container {
+    display: flex;
+    margin: 20px 0;
+}
+
+.carousel-slot {
+    flex: 1 0 100%;
+    flex-basis: 20%;
+    min-width: 240px;
+    margin: 0 10px;
+}
+
+@media (max-width: 1279px) {
+    .carousel-slot {
+        flex-basis: 30%;
+    }
+}
+
+@media (max-width: 959px) {
+    .carousel-slot {
+        flex-basis: 40%;
+    }
+}
+
+@media (max-width: 599px) {
+    .carousel-slot {
+        flex-basis: 80%;
+    }
+}
+
+.day {
+    flex: 0 0 240px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background-color: var(--card-color);
+}
+
+.day .header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.day .header img {
+    margin-right: 20px;
+    border-radius: 50%;
+    background-color: #d3d3d3;
+}
+
+.day .header .title,
+.day .header .sub-title {
+    margin: 0;
+}
+
+.day .temp {
+    font-size: 16px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.buttons > button {
+    margin: 0 10px;
+    padding: 2px 38px;
+    font-family: Arial;
+    font-size: 30px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    background-color: var(--card-color);
+    cursor: pointer;
+}
+
+.buttons > button::-moz-focus-inner {
+    border: 0;
+}
