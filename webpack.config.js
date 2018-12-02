@@ -5,16 +5,19 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require("compression-webpack-plugin");
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-    mode: 'production',
+    mode: isDev ? 'development' : 'production',
     entry: './src/index.jsx',
     output: {
-        filename: 'static/bundle.[hash].js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
     },
+    devtool: isDev ? 'source-map' : false,
     module: {
         rules: [
             {
@@ -36,6 +39,18 @@ module.exports = {
             }
         ]
     },
+    devServer: {
+        host: '0.0.0.0',
+        port: 3000,
+        historyApiFallback: true,
+        open: true,
+        hot: true
+    },
+    optimization: {
+        minimizer: isDev ? [] : [
+            new TerserPlugin()
+        ]
+    },
     plugins: [
         new HtmlWebpackPlugin({
             template: 'public/index.html',
@@ -44,7 +59,8 @@ module.exports = {
         new webpack.ContextReplacementPlugin(
             /moment[/\\]locale$/,
             /en/
-        ),
-        new BundleAnalyzerPlugin()
-    ]
+        )
+    ].concat(isDev ? [] : [
+        new CompressionPlugin()
+    ])
 };
