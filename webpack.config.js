@@ -14,7 +14,7 @@ module.exports = {
     entry: './src/index.jsx',
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'static'),
         publicPath: '/'
     },
     devtool: isDev ? 'source-map' : false,

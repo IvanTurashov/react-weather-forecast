@@ -5,7 +5,7 @@
   "description": "React's weather forecast application using OpenWeatherMap API",
   "author": "Ivan Turashov",
   "scripts": {
-    "clean": "rm -rf dist/",
+    "clean": "rm -rf static/",
     "preinstall": "rm -rf node_modules && npm cache clean --force",
     "prestart": "npm run clean",
     "start": "NODE_ENV=development webpack-dev-server --config webpack.config.js --hot --open",

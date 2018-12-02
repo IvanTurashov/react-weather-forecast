@@ -27,4 +27,4 @@ Application will run on `localhost:3000`.
 npm run build
 ```
 
-Build will be located in the directory `./dist`.
+Build will be located in the directory `./static`.
