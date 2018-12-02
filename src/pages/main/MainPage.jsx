@@ -1,15 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Menu from './Menu.jsx';
 
-class MainPage extends Component {
-    render() {
-        return (
-            <div>
-                <Menu />
-            </div>
-        );
-    }
-}
+const MainPage = () => <Menu />;
 
 export default MainPage;

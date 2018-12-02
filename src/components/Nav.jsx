@@ -1,25 +1,37 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "react-emotion";
+import StyleConst from '../style/constants';
 import Menu from './Menu.jsx';
 
 const MenuContainer = styled('nav')`
   display: flex;
-  border-bottom: 1px solid black;
+  align-items: center;
+  height: ${StyleConst.menuHeight};
+  border-bottom: 1px solid #b3b3b3;
+  box-sizing: border-box;
+  
+  @media (max-width: ${StyleConst.xs}) and (max-height: ${StyleConst.xs}) {
+    height: ${StyleConst.menuHeightSlim};
+  }
 `;
 
 const MenuLink = styled(NavLink)`
   padding: 0.8rem 1rem;
   margin: 0.5rem;
-  color: black;
+  color: #000;
+  text-decoration: none;
+  font-size: 18px;
+  text-transform: uppercase;
+  user-select: none;
   
   &.active {
-    color: brown;
+    color: #a52a2a;
   }
   
-  &:hover,
-  &:active {
-    color: aqua;
+  &:hover:not(.active),
+  &:active:not(.active) {
+    color: #b57b7b;
   }
 `;
 

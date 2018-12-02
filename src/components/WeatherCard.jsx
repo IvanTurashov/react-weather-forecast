@@ -6,6 +6,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from 'react-emotion';
+import StyleConst from '../style/constants';
 
 const Card = styled('div')`
   flex: 0 0 240px;
@@ -13,6 +14,10 @@ const Card = styled('div')`
   border: 1px solid rgba(0, 0, 0, .3);
   border-radius: 12px;
   background-color: rgb(245, 245, 245);
+  
+  @media (max-height: ${StyleConst.xs}) and (orientation: landscape) {
+      padding: 8px;
+  }
 `;
 
 const Header = styled('div')`
@@ -20,6 +25,14 @@ const Header = styled('div')`
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 10px;
+`;
+
+const Body = styled('div')`
+  @media (max-height: ${StyleConst.xs}) and (orientation: landscape) {
+      & > div:not(:first-child) {
+          display: none;
+      }
+  }
 `;
 
 const WeatherImage = styled('img')`
@@ -43,8 +56,7 @@ const Temperature = styled('div')`
 `;
 
 const ToCelsius = memo(({ temp }) => {
-    const value = temp - 273.15;
-    return value.toFixed() + '℃';
+    return temp.toFixed() + '℃';
 });
 
 const WeatherCard = memo(props => {
@@ -62,7 +74,7 @@ const WeatherCard = memo(props => {
                 </div>
             </Header>
 
-            <div>
+            <Body>
                 <Temperature>
                     <strong>
                         <ToCelsius temp={day.temp.max} />
@@ -72,7 +84,7 @@ const WeatherCard = memo(props => {
 
                 <div>humidity: {day.humidity} %</div>
                 <div>speed: {day.speed} mps</div>
-            </div>
+            </Body>
         </Card>
     );
 });

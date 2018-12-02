@@ -73,7 +73,7 @@ class Carousel extends Component {
     }
 
     render() {
-        const { children } = this.props;
+        const { children, request } = this.props;
         const { sliding, direction } = this.state;
 
         const isDesktop = !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));

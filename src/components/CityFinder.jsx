@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'react-emotion';
 import { connect } from "react-redux";
 import Select from 'react-select';
 import { cancelFetch, clear, fetch } from "../store/actions/cities";

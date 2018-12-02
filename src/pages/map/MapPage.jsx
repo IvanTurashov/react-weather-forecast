@@ -2,9 +2,9 @@
  * Created by ivan on 23.06.18.
  */
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import { Transition } from 'react-transition-group';
 import { fetch, cancelFetch, clear } from '../../store/actions/weatherList';
 
@@ -13,13 +13,8 @@ import WeatherCard from '../../components/WeatherCard.jsx';
 import Carousel from '../../components/carousel/Carousel.jsx';
 import { Loader } from '../../components/Loaders.jsx';
 
-const Page = styled('div')`
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    
-    opacity: ${props => props.transitionState === 'entered' ? 1 : '0'};
-    transition: opacity .8s ease-out;
+const CarouselWrapper = styled(Loader)` 
+  min-height: 110px;
 `;
 
 class MapPage extends Component {
@@ -48,33 +43,31 @@ class MapPage extends Component {
     }
 
     render() {
-        const { list, city, request } = this.props;
+        const { list, city, request, error } = this.props;
         const { mounted } = this.state;
 
         return (
-            <Transition in={mounted}
-                        timeout={0}
-                        unmountOnExit>
-                {(state) => (
-                    <Page transitionState={state}>
-                        <Map
-                            onClick={this.getWeather}
-                            popupText={city.name}
-                            coord={city.coord} />
-                        <Carousel>
-                            {list.map((day) => <WeatherCard day={day} key={day.date} />)}
-                        </Carousel>
-                    </Page>
-                )}
-            </Transition>
+            <Fragment>
+                <Map
+                    onClick={this.getWeather}
+                    popupText={city.name}
+                    coord={city.coord} />
+                <CarouselWrapper
+                    showLoader={request}
+                    showError={error}>
+                    <Carousel>
+                        {list.map((day) => <WeatherCard day={day} key={day.date} />)}
+                    </Carousel>
+                </CarouselWrapper>
+            </Fragment>
         );
     }
 }
 
 function mapStateToProps(state) {
-    const { city, list, request } = state.weatherList;
+    const { city, list, request, error } = state.weatherList;
 
-    return { city, list, request };
+    return { city, list, request, error };
 }
 
 function mapDispatchToProps(dispatch) {

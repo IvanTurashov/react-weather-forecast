@@ -6,7 +6,8 @@ const initialState = {
         id: 519690,
         name: 'Novaya Gollandiya'
     },
-    request: false
+    request: false,
+    error: false
 };
 
 export default function (state = initialState, action) {
@@ -16,7 +17,8 @@ export default function (state = initialState, action) {
         case 'FETCH_WEATHER':
             return {
                 ...state,
-                request: true
+                request: true,
+                error: false
             };
 
         case 'CANCEL_FETCH_WEATHER':
@@ -28,8 +30,17 @@ export default function (state = initialState, action) {
         case 'FETCH_SUCCESS_WEATHER':
             return {
                 ...data,
-                request: false
+                request: false,
+                error: false
             };
+
+        case 'FETCH_FAILED_WEATHER':
+            return {
+                ...state,
+                request: false,
+                error: true
+            };
+
         case 'CLEAN_WEATHER':
             return initialState;
 

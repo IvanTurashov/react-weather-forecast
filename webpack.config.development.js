@@ -4,8 +4,6 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const port = process.env.PORT || 3000;
-
 module.exports = {
     mode: 'development',
     entry: './src/index.jsx',
@@ -42,8 +40,8 @@ module.exports = {
         })
     ],
     devServer: {
-        host: 'localhost',
-        port: port,
+        host: '0.0.0.0',
+        port: 3000,
         historyApiFallback: true,
         open: true,
         hot: true

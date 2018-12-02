@@ -1,7 +1,8 @@
 import React from 'react';
 import styled, { css } from 'react-emotion';
 import GlobalIcon from '../../assets/global-loader.gif';
-import Icon from '../../assets/loader.gif';
+import LoaderIcon from '../../assets/loader.gif';
+import ErrorIcon from '../../assets/error.png';
 
 // CSS
 
@@ -46,24 +47,28 @@ export function GlobalLoader() {
 
 // Loader
 
-const Container = styled('div')`
-  ${ContainerCSS};
-  position: absolute;
-  z-index: 1;
-  background-color: rgba(255, 255, 255, .3);
-`;
+export const Loader = styled('div')`
+  position: relative;
 
-const Indicator = styled('div')`
-  width: 48px;
-  height: 6px;
-  background-image: url(${Icon});
-  ${IndicatorCSS};
+  &::after {
+      display: none;
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff center center no-repeat;
+      opacity: 0.8;
+      
+      ${({ showLoader }) => showLoader && css`
+          display: block;
+          background-image: url(${LoaderIcon});
+      `}
+      
+      ${({ showError }) => showError && css`
+          display: block;
+          background-image: url(${ErrorIcon});
+      `}
+  }
 `;
-
-export function Loader() {
-    return (
-        <Container>
-            <Indicator />
-        </Container>
-    );
-}

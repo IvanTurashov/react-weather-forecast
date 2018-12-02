@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
-import styled from 'react-emotion';
 import moment from 'moment';
-
-const Container = styled('canvas')`
-  
-`;
+import isEqual from 'react-fast-compare';
 
 class ChartWeather extends Component {
     constructor(props) {
@@ -31,30 +27,46 @@ class ChartWeather extends Component {
         const ctx = this.chart.getContext('2d');
 
         this.chart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: data,
             options: {
+                animation: {
+                    onComplete: function () {
+                        const chartInstance = this.chart;
+                        const ctx = chartInstance.ctx;
+                        ctx.textAlign = 'center';
+                        ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                        ctx.textBaseline = 'bottom';
+
+                        this.data.datasets.forEach((dataset, i) => {
+                            const meta = chartInstance.controller.getDatasetMeta(i);
+                            meta.data.forEach((bar, index) => {
+                                const data = dataset.data[index];
+                                const offset = data > 0 ? 5 : -20;
+                                ctx.fillText(`${data.toFixed()}`, bar._model.x, bar._model.y - offset);
+                            });
+                        });
+                    },
+                },
+                legend: {
+                    display: true,
+                    position: 'bottom'
+                },
                 emptyText: 'Нет данных',
                 withoutLabel: true,
                 responsive: true,
                 maintainAspectRatio: false,
                 tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                    callbacks: {
-                        title: (tooltipItems, data) => {
-                            const idx = tooltipItems[0].index;
-                            return moment.unix(data.labels[idx]).format('Do')
-                        },
-                        label: (tooltipItem, data) => 'Лабель'
-                           // `${data.datasets[tooltipItem.datasetIndex].label}: ${isNaN(tooltipItem.yLabel) ? 'Нет данных' : tooltipItem.yLabel}`
-                    }
+                    enabled: false
                 },
                 scales: {
                     xAxes: [{
                         ticks: {
                             callback: (value) => moment.unix(value).format('DD')
                         }
+                    }],
+                    yAxes: [{
+                        display: false
                     }]
                 }
             }

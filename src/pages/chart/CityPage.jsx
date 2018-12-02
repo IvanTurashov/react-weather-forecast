@@ -1,18 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import styled from 'react-emotion';
 import { cancelFetch, clear, fetch } from "../../store/actions/weatherList";
 
 import CityFinder from '../../components/CityFinder.jsx';
 import Chart from '../../components/Chart.jsx';
+import WeatherInfo from './WeatherInfo.jsx'
 import WeatherService from '../../services/WeatherService';
+import { Page, Row } from '../../style/common';
+import StyleConst from '../../style/constants';
 
-const Page = styled('div')`
+const RowExtend = styled(Row)`
+  flex: 1;
+  align-items: flex-start;
+  padding: 10px;
   
+  & > div {
+    padding: 0 20px;
+  }
+  
+  @media (max-width: ${StyleConst.sm}) {
+    flex: none;
+    display: block;
+  
+    & > div {
+      padding: 0;
+    }
+  }
 `;
 
-const WeatherCard = styled('div')`
+const InfoContainer = styled('div')`
+  flex: 1;
+`;
 
+const ChartContainer = styled('div')`
+  flex: 0 1 70%;
+  min-height: 400px;
+  height: 90%;    
+  pointer-events: none;
 `;
 
 class CityPage extends Component {
@@ -38,18 +63,23 @@ class CityPage extends Component {
         const current = weatherList[0];
 
         return (
-            <Page>
-                <CityFinder
-                    value={city}
-                    onChange={this.fetchWeather} />
+            <Fragment>
+                <RowExtend>
+                    <InfoContainer>
+                        <CityFinder
+                            value={city}
+                            onChange={this.fetchWeather} />
 
-                <WeatherCard>
-                    {/* todo: make CityName */}
-                    <h3>Weather in {`${city.name}, ${city.country || city.sys.country}`}</h3>
+                        <WeatherInfo
+                            weather={current}
+                            city={city} />
+                    </InfoContainer>
 
-                    <Chart data={WeatherService.prepareDataChart(weatherList)} />
-                </WeatherCard>
-            </Page>
+                    <ChartContainer>
+                        <Chart data={WeatherService.prepareDataChart(weatherList)} />
+                    </ChartContainer>
+                </RowExtend>
+            </Fragment>
         )
     }
 }

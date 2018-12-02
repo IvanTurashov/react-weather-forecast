@@ -12,6 +12,7 @@ const getDataByLatLng = (requestParams, cancelToken) => {
     const params = {
         cnt: 10,
         appid: APP_ID,
+        units: 'metric',
         ...requestParams
     };
 
@@ -64,18 +65,16 @@ class WeatherService {
     static prepareDataChart(list) {
         const datasetDay = {
             label: 'Day',
-            backgroundColor: "rgba(0, 0, 0, 0)",
-            lineTension: 0,
-            borderColor: "rgba(146, 206, 168, 1)",
-            pointBackgroundColor: "rgba(146, 206, 168, 1)",
+            backgroundColor: 'rgba(255, 143, 0, .2)',
+            borderWidth: 1,
+            borderColor: 'rgba(255, 143, 0, .7)',
             data: []
         };
         const datasetNight = {
             label: 'Night',
-            backgroundColor: "rgba(0, 0, 0, 0)",
-            lineTension: 0,
-            borderColor: "rgba(85, 206, 168, 1)",
-            pointBackgroundColor: "rgba(85, 206, 168, 1)",
+            backgroundColor: 'rgba(60, 78, 77, .2)',
+            borderWidth: 1,
+            borderColor: 'rgba(60, 78, 77, .7)',
             data: []
         };
         const labels = [];
