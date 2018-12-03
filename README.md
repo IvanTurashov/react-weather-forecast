@@ -1,6 +1,6 @@
 # react-weather-forecast
 React's weather forecast application using OpenWeatherMap API.
-[Demo](https://ivanturashov.github.io/react-weather-forecast/)
+[Demo](http://forecast-weather-demo.epizy.com/)
 
 ## Getting started
 Instructions for running and using the application.
