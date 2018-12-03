@@ -19,7 +19,7 @@ npm i
 npm start
 ```
 
-Application will run on `localhost:3000`.
+Application will run on `0.0.0.0:3000` for testing on other device. Should be replaced by `localhost:3000`.
 
 ### Production
 
