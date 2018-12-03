@@ -14,7 +14,6 @@ const routes = [
         exact: true,
         component: Main,
         fullSize: true,
-        // background: 'linear-gradient(#ffffff 21%, #d6d6d6 30%, #d6d6d6 50%, #d6d6d6 50%, #d6d6d6 50%, #d6d6d6 70%, #ffffff 80%)',
         center: true
     },
     {
