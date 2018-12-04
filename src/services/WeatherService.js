@@ -3,33 +3,31 @@
  */
 
 import axios from 'axios';
+import API from './API';
 
-const APPID = '093c63d1d6dd2f0f77c6f14d91a19042';
-const BASE_URL = 'https://api.openweathermap.org/data/2.5/forecast/daily';
+const APP_ID = '093c63d1d6dd2f0f77c6f14d91a19042';
 
-const getDataByLatLng = ({ lat, lng }, cancelToken) => {
-    const params = {
-        lat: lat,
-        lon: lng,
-        cnt: 10,
-        appid: APPID
-    };
+class WeatherService {
+    static getWeatherByPosition(requestParams, cancelToken) {
+        const params = {
+            cnt: 10,
+            appid: APP_ID,
+            units: 'metric',
+            ...requestParams
+        };
 
-    return new Promise((resolve, reject) => {
-        axios
-            .get(BASE_URL, { params, cancelToken })
-            .then(response => {
-                let { city, list } = response.data;
+        return axios.get(API.forecastDaily, {
+            params,
+            cancelToken,
+            transformResponse: (data) => {
+                let { city, list = [] } = JSON.parse(data);
 
                 list = list.map(day => {
                     return {
                         date: day.dt,
                         humidity: day.humidity,
                         speed: day.speed,
-                        temp: {
-                            max: day.temp.max,
-                            min: day.temp.min
-                        },
+                        temp: day.temp,
                         main: {
                             icon: day.weather[0].icon,
                             description: day.weather[0].description
@@ -37,15 +35,50 @@ const getDataByLatLng = ({ lat, lng }, cancelToken) => {
                     };
                 });
 
-                resolve({ city, list });
-            })
-            .catch(reject)
-    });
-};
+                return { city, list };
+            }
+        });
+    }
 
-class WeatherService {
-    static getWeatherByPosition(obj, cancelToken) {
-        return getDataByLatLng(obj, cancelToken);
+    static findCities(q, cancelToken) {
+        const params = {
+            q,
+            cnt: 10,
+            appid: APP_ID
+        };
+
+        return axios.get(API.find, {
+            params,
+            cancelToken
+        });
+    }
+
+    static prepareDataChart(list) {
+        const datasetDay = {
+            label: 'Day',
+            backgroundColor: 'rgba(255, 143, 0, .2)',
+            borderWidth: 1,
+            borderColor: 'rgba(255, 143, 0, .7)',
+            data: []
+        };
+        const datasetNight = {
+            label: 'Night',
+            backgroundColor: 'rgba(60, 78, 77, .2)',
+            borderWidth: 1,
+            borderColor: 'rgba(60, 78, 77, .7)',
+            data: []
+        };
+        const labels = [];
+
+        for (let i = 0; i < list.length; i++) {
+            const day = list[i];
+
+            labels.push(day.date);
+            datasetDay.data.push(day.temp.day);
+            datasetNight.data.push(day.temp.night);
+        }
+
+        return { labels, datasets: [datasetDay, datasetNight] };
     }
 }
 

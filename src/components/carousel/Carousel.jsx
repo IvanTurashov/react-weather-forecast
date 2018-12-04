@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react';
 import Swipeable from 'react-swipeable';
-import PropTypes from 'prop-types';
+import { Wrapper, Container, Slot, Buttons, Button } from './elements';
 
 class Carousel extends Component {
     constructor(props) {
@@ -14,6 +14,9 @@ class Carousel extends Component {
             direction: 'next',
             sliding: false
         };
+
+        this.nextSlide = this.nextSlide.bind(this);
+        this.prevSlide = this.prevSlide.bind(this);
     }
 
     static getSlotWidth() {
@@ -21,7 +24,7 @@ class Carousel extends Component {
 
         if (cw <= 599) return 80;
         if (cw <= 959) return 40;
-        if (cw <= 1249) return 30;
+        if (cw <= 1279) return 30;
 
         return 20;
     }
@@ -69,7 +72,8 @@ class Carousel extends Component {
     }
 
     render() {
-        const { children } = this.props;
+        const { children, request } = this.props;
+        const { sliding, direction } = this.state;
 
         const isDesktop = !(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
         const slotWidth = Carousel.getSlotWidth();
@@ -79,34 +83,26 @@ class Carousel extends Component {
                 <Swipeable
                     onSwipedLeft={() => this.handleSwipe(true)}
                     onSwipedRight={() => this.handleSwipe()}>
-                    <div className="wrapper">
-                        <div className="carousel-container"
-                             style={{
-                                 transition: `${this.state.sliding ? 'none' : 'transform .4s ease'}`,
-                                 transform: `${!this.state.sliding ? `translateX(calc(${-slotWidth}% - 20px))` : this.state.direction === 'prev' ? `translateX(calc(2 * (${-slotWidth}% - 20px)))` : 'translateX(0%)'}`
-                             }}>
+                    <Wrapper>
+                        <Container sliding={sliding} direction={direction} slotWidth={slotWidth}>
                             {children.map((child, index) => (
-                                <div className="carousel-slot" key={index} style={{ order: this.getOrder(index) }}>
+                                <Slot key={child.key} order={this.getOrder(index)}>
                                     {child}
-                                </div>
+                                </Slot>
                             ))}
-                        </div>
-                    </div>
+                        </Container>
+                    </Wrapper>
                 </Swipeable>
 
                 {isDesktop
-                    ? <div className="buttons">
-                        <button onClick={() => this.prevSlide()}>&#8592;</button>
-                        <button onClick={() => this.nextSlide()}>&#8594;</button>
-                    </div>
+                    ? <Buttons>
+                        <Button onClick={this.prevSlide}>&#8592;</Button>
+                        <Button onClick={this.nextSlide}>&#8594;</Button>
+                    </Buttons>
                     : null}
             </div>
         );
     }
 }
-
-Carousel.propTypes = {
-    children: PropTypes.node
-};
 
 export default Carousel;
