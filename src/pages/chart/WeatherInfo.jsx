@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import moment from "moment";
 
-import { ToCelsius } from "../../components/Common.jsx";
+import { Celsius } from "../../components/Common.jsx";
 import { List, ListItem } from "../../style/common";
 import StyleConst from '../../style/constants';
 
@@ -75,10 +75,10 @@ const WeatherInfo = memo(({ weather = null, city }) => {
 
                     <Temperature>
                         <div>
-                            Day: <ToCelsius temp={weather.temp.day} />
+                            Day: <Celsius temp={weather.temp.day} />
                         </div>
                         <div>
-                            Night: <ToCelsius temp={weather.temp.day} />
+                            Night: <Celsius temp={weather.temp.day} />
                         </div>
                     </Temperature>
                 </MainInfo>

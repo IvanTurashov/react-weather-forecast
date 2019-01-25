@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import Select from 'react-select';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { cancelFetch, clear, fetch } from "../../store/actions/cities";
 
 const Description = styled('div')`
@@ -15,6 +15,7 @@ class City extends Component {
         super(props);
 
         this.searchCity = this.searchCity.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
@@ -36,12 +37,18 @@ class City extends Component {
         if (valid) fetch(q);
     }
 
+    handleChange({id}) {
+        const {onChange} = this.props;
+
+        onChange({id});
+    }
+
     validate(v) {
         return v.trim().length > 2;
     }
 
     render() {
-        const { cities, request, value, onChange } = this.props;
+        const { cities, request, value } = this.props;
 
         return (
             <Fragment>
@@ -51,7 +58,7 @@ class City extends Component {
                     getOptionLabel={city => city.id ? `${city.name}, ${city.country || city.sys.country}` : 'Not selected'}
                     getOptionValue={(option) => (option['id'])}
                     onInputChange={this.searchCity}
-                    onChange={onChange}
+                    onChange={this.handleChange}
                     isLoading={request}
                 />
 

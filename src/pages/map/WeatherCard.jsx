@@ -4,9 +4,9 @@
 
 import React, { memo } from 'react';
 import moment from 'moment';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
-import { ToCelsius } from "../../components/Common.jsx";
+import { Celsius } from "../../components/Common.jsx";
 import StyleConst from '../../style/constants';
 
 const Card = styled('div')`
@@ -75,9 +75,9 @@ const WeatherCard = memo(props => {
 
             <Temperature>
                 <strong>
-                    <ToCelsius temp={day.temp.max} />
+                    <Celsius temp={day.temp.max} />
                 </strong>
-                | <ToCelsius temp={day.temp.min} />
+                | <Celsius temp={day.temp.min} />
             </Temperature>
 
             <Additional>

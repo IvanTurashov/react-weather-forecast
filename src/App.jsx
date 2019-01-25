@@ -4,15 +4,16 @@
 
 import React, { Fragment, Suspense } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
-import { injectGlobal } from 'emotion';
+import {Global, css} from '@emotion/core';
 import routes from './routes';
 
 import { GlobalLoader } from './components/Loaders.jsx';
 import Page from './pages/Page.jsx';
 import Nav from './components/Nav.jsx';
 
+const GlobalStyle = css`
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
 
-injectGlobal`
   * {
     outline: none;
   }
@@ -38,6 +39,7 @@ const App = (props) => {
 
     return (
         <Fragment>
+            <Global styles={GlobalStyle}/>
             {pathname !== '/' && <Nav />}
 
             <Suspense fallback={<GlobalLoader />}>

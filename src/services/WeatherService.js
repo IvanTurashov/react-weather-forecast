@@ -74,8 +74,8 @@ class WeatherService {
             const day = list[i];
 
             labels.push(day.date);
-            datasetDay.data.push(day.temp.day);
-            datasetNight.data.push(day.temp.night);
+            datasetDay.data.push(day.temp.day.toFixed());
+            datasetNight.data.push(day.temp.night.toFixed());
         }
 
         return { labels, datasets: [datasetDay, datasetNight] };

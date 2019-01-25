@@ -7,10 +7,6 @@ class API {
         return `${API.base}/find`;
     }
 
-    static get forecast() {
-        return `${API.base}/forecast`;
-    }
-
     static get forecastDaily() {
         return `${API.base}/forecast/daily`;
     }

@@ -3,7 +3,7 @@
  */
 
 import React, { Fragment } from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import WeatherPage from '../PageHOC.jsx';
 import Map from './Map.jsx';
