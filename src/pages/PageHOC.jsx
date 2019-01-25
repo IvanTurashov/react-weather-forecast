@@ -25,12 +25,10 @@ const PageHOC = Page => {
         }
 
         render() {
-            const { props, getWeather } = this;
-
             return (
                 <Page
-                    getWeather={getWeather}
-                    {...props} />
+                    getWeather={this.getWeather}
+                    {...this.props} />
             );
         }
     }
