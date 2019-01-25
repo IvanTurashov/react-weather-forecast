@@ -4,7 +4,7 @@
 
 import React, { memo } from 'react';
 import moment from 'moment';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import { ToCelsius } from "../../components/Common.jsx";
 import StyleConst from '../../style/constants';

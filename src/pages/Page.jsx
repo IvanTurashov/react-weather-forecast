@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import styled, { css } from 'react-emotion';
+import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 import StyleConst from '../style/constants';
 import { Transition } from "react-transition-group";
 

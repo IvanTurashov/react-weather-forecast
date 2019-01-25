@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import Select from 'react-select';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { cancelFetch, clear, fetch } from "../../store/actions/cities";
 
 const Description = styled('div')`

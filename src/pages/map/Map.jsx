@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import L from 'leaflet';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import 'leaflet/dist/leaflet.css';
 import marker from 'leaflet/dist/images/marker-icon.png';

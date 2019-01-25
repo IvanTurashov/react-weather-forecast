@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 const ErrorContainer = styled('div')`
   width: 100%;
