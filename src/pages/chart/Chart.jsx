@@ -43,7 +43,7 @@ class ChartWeather extends Component {
                             meta.data.forEach((bar, index) => {
                                 const data = dataset.data[index];
                                 const offset = data > 0 ? 2 : -16;
-                                ctx.fillText(data.toFixed(), bar._model.x, bar._model.y - offset);
+                                ctx.fillText(data, bar._model.x, bar._model.y - offset);
                             });
                         });
                     }
