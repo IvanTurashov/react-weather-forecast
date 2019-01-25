@@ -1,5 +1,5 @@
 import { memo } from "react";
 
-export const ToCelsius = memo(({ temp }) => {
+export const Celsius = memo(({ temp }) => {
     return temp.toFixed() + '℃';
 });
