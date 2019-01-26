@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import styled from "react-emotion";
+import styled from '@emotion/styled';
 import StyleConst from '../style/constants';
 import Menu from './Menu.jsx';
 
